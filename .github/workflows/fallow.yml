@@ -1,0 +1,15 @@
+name: Fallow analysis
+on: [push, pull_request]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  fallow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: fallow-rs/fallow@v3
+        with:
+          sarif: true
