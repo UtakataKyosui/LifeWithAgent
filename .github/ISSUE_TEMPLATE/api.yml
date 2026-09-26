@@ -1,0 +1,82 @@
+name: "API"
+description: "API エンドポイント・ルーティング・サーバーサイド処理の実装"
+title: "[API] "
+labels: ["type:api"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 4: テキストUI
+        - Phase 5: 音声入力
+        - Phase 8: MCP連携
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: API 概要
+      placeholder: "例）音声文字起こしエンドポイント（POST /api/voice/transcribe）を実装する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] src/routes/voice.ts を作成する
+        - [ ] multipart/form-data の audio を受け取る
+        - [ ] Workers AI Whisper（@cf/openai/whisper-large-v3-turbo）を呼び出す
+        - [ ] { text: string } を返す
+        - [ ] エラーハンドリングを実装する
+    validations:
+      required: true
+
+  - type: textarea
+    id: request_response
+    attributes:
+      label: リクエスト / レスポンス仕様
+      render: json
+      placeholder: |
+        リクエスト：FormData { audio: File }
+        レスポンス：{ "text": "牛乳を買う" }
+    validations:
+      required: false
+
+  - type: textarea
+    id: test_method
+    attributes:
+      label: テスト方法
+      placeholder: |
+        curl -F "audio=@test.webm" http://localhost:4111/api/voice/transcribe
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+    validations:
+      required: false
