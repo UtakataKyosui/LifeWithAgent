@@ -1,0 +1,71 @@
+name: "Setup"
+description: "プロジェクト初期化・開発環境・設定ファイルの作成"
+title: "[Setup] "
+labels: ["type:setup"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 1: 基盤構築・検証
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 作業概要
+      placeholder: "例）Mastra プロジェクトの初期化"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      placeholder: "例）Mastra・Cloudflare Workers・Workers AI を使用した開発基盤を整える"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] npm create mastra@latest でプロジェクトを作成する
+        - [ ] wrangler.jsonc に AI・D1 バインディングを設定する
+        - [ ] mastra dev が正常に起動する
+        - [ ] .gitignore を確認・調整する
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 実装内容・対象ファイル
+      placeholder: |
+        - package.json
+        - wrangler.jsonc
+        - src/mastra/index.ts
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補足
+    validations:
+      required: false
