@@ -1,0 +1,88 @@
+name: "Bug"
+description: "不具合・想定と異なる挙動の報告"
+title: "[Bug] "
+labels: ["type:bugfix"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 不具合報告
+        再現手順をできるだけ具体的に記載してください。
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 実行環境
+      options:
+        - ローカル（mastra dev）
+        - 本番（Cloudflare Workers）
+        - 両方
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:critical
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: bug_summary
+    attributes:
+      label: 不具合の概要
+      placeholder: "例）習慣を2回目に記録した際に重複エラーが表示される"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: 期待される挙動
+      placeholder: "例）同じ習慣を同じ日に再度記録した場合は「すでに今日の記録があります」と返す"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: 実際の挙動
+      placeholder: "例）D1 の UNIQUE 制約エラーがそのまま表示される"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 再現手順
+      placeholder: |
+        1. 「ストレッチやった」と入力する
+        2. 再度「ストレッチやった」と入力する
+        3. 不具合が発生する
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: エラーログ・コンソール出力
+      description: ターミナル・ブラウザコンソールのログがあれば貼り付けてください
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 修正完了条件
+      placeholder: |
+        - [ ] 想定どおりのメッセージが返る
+        - [ ] エラーが画面に表示されない
+        - [ ] 既存機能に影響がない
+    validations:
+      required: true
