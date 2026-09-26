@@ -1,0 +1,101 @@
+name: "Investigation"
+description: "技術調査・モデル検証・実現可否の確認"
+title: "[Investigation] "
+labels: ["type:investigation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 技術検証 Issue
+        実装前に可否・安定性・品質を確認するための調査を行います。
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 1: 基盤構築・検証
+        - Phase 2: タスク管理
+        - Phase 3: 習慣管理
+        - Phase 4: テキストUI
+        - Phase 5: 音声入力
+        - Phase 6: 音声出力
+        - Phase 7: デプロイ
+        - Phase 8: MCP連携
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+        - priority:critical
+    validations:
+      required: true
+
+  - type: input
+    id: investigation_subject
+    attributes:
+      label: 調査対象
+      placeholder: "例）Workers AI Llama 3.3 70B のツール呼び出し安定性検証"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 調査目的
+      description: なぜこの調査が必要なのかを記載してください
+      placeholder: "例）Agent が自前 Tool を正しく選択・呼び出しできるかを事前に判断するため"
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification_items
+    attributes:
+      label: 検証項目
+      description: 確認すべき項目をチェックリスト形式で記載してください
+      placeholder: |
+        - [ ] 日本語での自然な応答が得られる
+        - [ ] Tool 定義から正しい引数を生成できる
+        - [ ] 複数 Tool の中から適切な Tool を選択できる
+        - [ ] 曖昧な指示への対応が安定している
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_result
+    attributes:
+      label: 期待する成果物
+      description: この調査の完了時に残すものを記載してください
+      placeholder: |
+        - [ ] 検証結果のまとめ（OK / 要改善 / 不可）
+        - [ ] 代替モデルの候補（必要な場合）
+        - [ ] 検証時に使用したプロンプト・テスト発話
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_cases
+    attributes:
+      label: テストケース（発話例）
+      placeholder: |
+        - 「こんにちは」
+        - 「牛乳を買うをタスクに追加して」
+        - 「ストレッチやった」
+        - 「今やることを教えて」
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+      placeholder: "#1, #2"
+    validations:
+      required: false
