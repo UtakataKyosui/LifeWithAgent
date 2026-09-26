@@ -1,0 +1,83 @@
+name: "Database"
+description: "Cloudflare D1 スキーマ・マイグレーション・クエリ設計"
+title: "[Database] "
+labels: ["type:database"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 1: 基盤構築・検証
+        - Phase 2: タスク管理
+        - Phase 3: 習慣管理
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 作業概要
+      placeholder: "例）D1 初期マイグレーション（tasks / habits / habit_logs）を作成する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] migrations/0001_init.sql を作成する
+        - [ ] tasks テーブルを定義する
+        - [ ] habits テーブルを定義する
+        - [ ] habit_logs テーブルを定義する
+        - [ ] UNIQUE(habit_id, logged_date) 制約を設定する
+        - [ ] ローカル D1 にマイグレーションを適用できる
+    validations:
+      required: true
+
+  - type: textarea
+    id: schema_definition
+    attributes:
+      label: テーブル定義
+      description: カラム・型・制約を記載してください
+      render: sql
+    validations:
+      required: false
+
+  - type: textarea
+    id: migration_command
+    attributes:
+      label: 確認コマンド
+      render: shell
+      placeholder: |
+        npx wrangler d1 migrations apply life-app-db --local
+        npx wrangler d1 migrations apply life-app-db --remote
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+    validations:
+      required: false
