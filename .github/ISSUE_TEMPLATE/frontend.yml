@@ -1,0 +1,94 @@
+name: "Frontend"
+description: "チャットUI・Push to Talk・音声読み上げの実装"
+title: "[Frontend] "
+labels: ["type:frontend"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 4: テキストUI
+        - Phase 5: 音声入力
+        - Phase 6: 音声出力
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 作業概要
+      placeholder: "例）Push to Talk 録音UIを実装する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] public/index.html を作成・更新する
+        - [ ] public/app.js を作成・更新する
+        - [ ] public/style.css を作成・更新する
+        - [ ] Chrome / Safari（iOS）で動作確認する
+    validations:
+      required: true
+
+  - type: textarea
+    id: ui_spec
+    attributes:
+      label: UI 仕様
+      description: 画面構成・ボタン・表示状態を記載してください
+      placeholder: |
+        - チャット履歴（ユーザー / アシスタント）
+        - 文字起こし結果の編集欄
+        - [押して話す] ボタン
+        - [送信] ボタン
+        - [読み上げ ON/OFF] トグル
+    validations:
+      required: false
+
+  - type: textarea
+    id: browser_support
+    attributes:
+      label: 対応ブラウザ確認項目
+      placeholder: |
+        - [ ] Google Chrome（最新版）
+        - [ ] Safari（macOS）
+        - [ ] Safari（iOS）
+        - [ ] Microsoft Edge（最新版）
+    validations:
+      required: false
+
+  - type: textarea
+    id: test_method
+    attributes:
+      label: テスト方法
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+    validations:
+      required: false
