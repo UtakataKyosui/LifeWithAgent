@@ -10,6 +10,8 @@ import {
 } from '@mastra/observability';
 import { agent } from './agents/agent';
 import { startScheduleTool, stopScheduleTool } from './tools/schedule-tools';
+import { CloudflareDeployer } from '@mastra/deployer-cloudflare'
+
 
 export const mastra = new Mastra({
   bundler: {
@@ -36,5 +38,8 @@ export const mastra = new Mastra({
         spanOutputProcessors: [new SensitiveDataFilter()],
       },
     },
+  }),
+  deployer: new CloudflareDeployer({
+    name: process.env.CLOUDFLARE_DEPLOYER_NAME || 'mastra'
   }),
 });
