@@ -1,0 +1,85 @@
+name: "DevOps"
+description: "Cloudflare デプロイ・wrangler・環境変数・Cloudflare Access の設定"
+title: "[DevOps] "
+labels: ["type:devops"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      options:
+        - Phase 7: デプロイ
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 作業概要
+      placeholder: "例）Cloudflare Workers へデプロイ設定を行う"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] wrangler.jsonc を最終化する（assets / ai / d1_databases / compatibility_flags）
+        - [ ] 本番用 D1 データベースを作成する
+        - [ ] 本番へマイグレーションを適用する
+        - [ ] npm run build が成功する
+        - [ ] npx wrangler deploy が成功する
+        - [ ] 本番 URL でアプリへアクセスできる
+    validations:
+      required: true
+
+  - type: textarea
+    id: env_vars
+    attributes:
+      label: 環境変数・シークレット
+      description: 使用する `.dev.vars` / `wrangler secret` を記載してください
+      placeholder: |
+        MCP_CALENDAR_URL
+        MCP_CALENDAR_TOKEN
+        NODE_ENV
+    validations:
+      required: false
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: 実行コマンド
+      render: shell
+      placeholder: |
+        npx wrangler d1 create life-app-db
+        npx wrangler d1 migrations apply life-app-db --remote
+        npm run build && npx wrangler deploy
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+    validations:
+      required: false
