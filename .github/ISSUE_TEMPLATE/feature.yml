@@ -1,0 +1,112 @@
+name: "Feature"
+description: "新機能・Tool・Agent 機能の実装"
+title: "[PhaseX] "
+labels: ["type:feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 新機能 Issue
+        生活管理アプリケーションに追加する新機能を定義します。
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: フェーズ
+      description: 該当する開発フェーズを選択してください
+      options:
+        - Phase 1: 基盤構築・検証
+        - Phase 2: タスク管理
+        - Phase 3: 習慣管理
+        - Phase 4: テキストUI
+        - Phase 5: 音声入力
+        - Phase 6: 音声出力
+        - Phase 7: デプロイ
+        - Phase 8: MCP連携
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+        - priority:critical
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 機能名
+      description: 実装する機能を一文で記載してください
+      placeholder: "例）タスク追加Tool（addTask）を実装する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      description: なぜこの機能が必要なのかを記載してください
+      placeholder: "例）自然言語からタスクをD1へ登録できるようにするため"
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件（Acceptance Criteria）
+      description: このIssueが完了したと判断する条件をチェックリスト形式で記載してください
+      placeholder: |
+        - [ ] src/mastra/tools/tasks.ts に addTask Tool を作成する
+        - [ ] title・due_date を D1 の tasks テーブルへ保存する
+        - [ ] Agent から Tool が正しく呼び出される
+        - [ ] 音声向けに簡潔な応答を返す
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 実装内容
+      description: 変更・追加予定のファイルや実装方針を記載してください
+      placeholder: |
+        - 追加：src/mastra/tools/tasks.ts
+        - 変更：src/mastra/agents/life-assistant.ts（tools に追加）
+    validations:
+      required: false
+
+  - type: textarea
+    id: test_method
+    attributes:
+      label: テスト方法
+      description: 動作確認の手順・発話例を記載してください
+      placeholder: |
+        1. mastra dev を起動する
+        2. 「明日までに牛乳を買うをタスクに追加して」と入力する
+        3. D1 の tasks テーブルにレコードが追加されることを確認する
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+      description: 依存関係がある Issue があれば #番号 で記載してください
+      placeholder: |
+        Depends on #1
+        Blocks #5
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補足・メモ
+      description: その他共有事項があれば記載してください
+    validations:
+      required: false
