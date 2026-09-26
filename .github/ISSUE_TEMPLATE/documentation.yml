@@ -1,0 +1,74 @@
+name: "Documentation"
+description: "README・要求整理書・開発手順などのドキュメント作成・更新"
+title: "[Docs] "
+labels: ["type:docs"]
+body:
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先度
+      options:
+        - priority:high
+        - priority:medium
+        - priority:low
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: ドキュメント作業概要
+      placeholder: "例）README にローカル開発・D1・デプロイ手順を追記する"
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      placeholder: "例）開発着手時に環境構築で迷わないようにするため"
+    validations:
+      required: true
+
+  - type: textarea
+    id: target_files
+    attributes:
+      label: 対象ファイル
+      placeholder: |
+        - README.md
+        - docs/requirements.md
+        - docs/architecture.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件
+      placeholder: |
+        - [ ] 必要な手順が漏れなく記載されている
+        - [ ] コマンド例が正確である
+        - [ ] 環境変数一覧を記載している
+        - [ ] Markdown の書式が崩れていない
+    validations:
+      required: true
+
+  - type: textarea
+    id: content_outline
+    attributes:
+      label: 記載予定の内容
+      placeholder: |
+        - 前提条件（Node.js / pnpm / wrangler）
+        - ローカル開発手順
+        - D1 ローカル・リモートマイグレーション
+        - Cloudflare デプロイ手順
+        - 環境変数（.dev.vars）
+    validations:
+      required: false
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: 関連Issue
+    validations:
+      required: false
