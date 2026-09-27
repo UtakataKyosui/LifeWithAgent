@@ -1,9 +1,7 @@
+import { env } from 'cloudflare:workers';
 import { Mastra } from '@mastra/core/mastra';
-import { LibSQLStore } from '@mastra/libsql';
-import { DuckDBStore } from '@mastra/duckdb';
-import { MastraCompositeStore } from '@mastra/core/storage';
+import { D1Store } from '@mastra/cloudflare-d1';
 import {
-  MastraStorageExporter,
   MastraPlatformExporter,
   Observability,
   SensitiveDataFilter,
@@ -14,22 +12,14 @@ import { CloudflareDeployer } from '@mastra/deployer-cloudflare'
 
 
 export const mastra = new Mastra({
-  bundler: {
-    externals: ['@duckdb/node-bindings'],
-  },
   agents: { agent },
   tools: { startScheduleTool, stopScheduleTool },
-  storage: new MastraCompositeStore({
-    id: 'composite-storage',
-    domains: {
-      observability: await new DuckDBStore().getStore('observability'),
-    },
-  }),
+  storage: new D1Store({ id: 'd1-storage', binding: env.DB }),
   observability: new Observability({
     configs: {
       default: {
         serviceName: 'mastra',
-        exporters: [new MastraStorageExporter(), new MastraPlatformExporter()],
+        exporters: [new MastraPlatformExporter()],
         spanOutputProcessors: [new SensitiveDataFilter()],
       },
     },
