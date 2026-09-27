@@ -7,9 +7,7 @@
     "src/main.{ts,tsx,js,jsx}"
   ],
   "workspaces": {
-    "patterns": [
-      "."
-    ]
+    "patterns": ["."]
   },
   "duplicates": {
     // Hide pair-only clones; focus on widespread copy-paste
