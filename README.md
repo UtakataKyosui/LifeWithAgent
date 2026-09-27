@@ -11,20 +11,23 @@ This starter provides you with a general-purpose Mastra agent that can research 
 - Conversation memory, generated thread titles, and task tracking
 - Built-in web search and direct web page fetching
 - Recurring schedules that persist across restarts
-- Local libSQL storage and DuckDB observability, with optional Turso storage
+- Cloudflare D1 storage and a Workers AI binding
 - A bundled Mastra skill that helps coding agents use current Mastra APIs
 
 ## Get started
 
-Set your `OPENAI_API_KEY` in `.env` or in your environment, then run:
+This project runs locally on the Cloudflare Workers runtime, not on `mastra dev`. `pnpm run dev` fails because `src/mastra/index.ts` imports `cloudflare:workers`, and Mastra Studio is not available locally. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+Set your `OPENAI_API_KEY` in `.env`, log in with `pnpm exec wrangler login`, then run:
 
 ```shell
-pnpm run dev
+pnpm build
+pnpm exec wrangler dev
 ```
 
-Open [http://localhost:4111](http://localhost:4111) in your browser to access [Mastra Studio](https://mastra.ai/docs/studio/overview).
+The Mastra API is served under [http://localhost:8787/api](http://localhost:8787/api/agents).
 
-Select **Agent** in Mastra Studio and try one of these prompts:
+Try one of these prompts with the agent:
 
 - `Get the weather forecast for Austin this weekend.`
 - `Create a landing page for a Japanese sakura festival.`
@@ -38,7 +41,7 @@ The local filesystem tools stay inside the `workspace/` directory, which resolve
 
 ## Storage
 
-The default `file:./mastra.db` database stores agent memory, tasks, and schedules locally. To use Turso, set `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` in `.env`.
+The Cloudflare D1 database `life-with-agent-db` (binding `DB`) stores agent memory, tasks, and schedules. During `wrangler dev`, D1 is simulated locally under `.wrangler/state/`.
 
 Recurring schedules continue to use model tokens until you pause them. Ask the agent to pause a schedule with the ID returned by `start_schedule`.
 
