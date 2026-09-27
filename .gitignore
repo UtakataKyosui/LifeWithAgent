@@ -13,3 +13,4 @@ src/mastra/public/
 *.duckdb
 *.duckdb.wal
 .fallow/
+.repowise/
